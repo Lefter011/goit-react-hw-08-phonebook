@@ -1,0 +1,20 @@
+.searchForm {
+    background-color: rgba(236, 236, 236, 0.733);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-bottom: 15px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.searchForm>label>input {
+    display: block;
+}
+
+.searchForm>button {
+    margin: 3px;
+    background-color: darkgray;
+    border: 1px dotted black;
+    cursor: pointer;
+}

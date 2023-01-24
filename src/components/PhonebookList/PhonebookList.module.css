@@ -1,0 +1,14 @@
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.list>button {
+    display: block;
+    height: 20px;
+    cursor: pointer;
+    border: 1px dotted black;
+    border-radius: 2px;
+}
