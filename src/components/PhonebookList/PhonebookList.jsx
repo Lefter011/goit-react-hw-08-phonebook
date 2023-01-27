@@ -1,8 +1,9 @@
-import style from './PhonebookList.module.css';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/operations';
+import { getContacts, getFilter } from 'redux/phonebook/selectors';
+import { deleteContact } from 'redux/phonebook/operations';
+
+import { Button } from '@chakra-ui/react';
+import style from './PhonebookList.module.css';
 
 export const PhonebookList = () => {
     const contacts = useSelector(getContacts),
@@ -25,7 +26,7 @@ export const PhonebookList = () => {
             {actuallyContacts && actuallyContacts.map((item, index) => {
             return (<li className={style.list} key={index}>
                 <p>{item.name}: {item.number}</p>
-                <button type="button"  onClick={() => dispatch(deleteContact(item.id))}>delete</button>
+                <Button type="button"  onClick={() => dispatch(deleteContact(item.id))}>delete</Button>
                 </li>)
             })}
         </ul>

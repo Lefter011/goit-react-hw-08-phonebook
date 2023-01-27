@@ -1,6 +1,8 @@
-import style from './filterInput.module.css';
 import { useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/contactsSlice';
+import { changeFilter } from 'redux/phonebook/contactsSlice';
+
+import { Input } from '@chakra-ui/react';
+import style from './filterInput.module.css';
 
 export const FilterInput = () => {
   const dispatch = useDispatch();
@@ -8,7 +10,7 @@ export const FilterInput = () => {
     dispatch(changeFilter(e.currentTarget.value))
   }
   
-  return <label> Search contact by name
-  <input className={style.filterInput} type="text" onInput={onFilterInput} />
+  return <label>
+  <Input placeholder='Search contact by name' className={style.filterInput} type="text" onInput={onFilterInput} />
   </label>
 }

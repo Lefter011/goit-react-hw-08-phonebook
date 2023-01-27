@@ -1,28 +1,53 @@
-import { PhonebookList } from "./PhonebookList/PhonebookList";
-import { ContactsForm } from "./ContactsForm/ContactsForm";
-import { FilterInput } from "./FilterForm/FilterInput";
-
-import { useSelector, useDispatch } from "react-redux";
-import { getContacts, selectError, selectIsLoading } from "redux/selectors";
-
-import { fetchContacts } from "redux/operations";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import style from './app.module.css';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+
+import { refreshUser } from 'redux/auth/operations';
+import { useAuth } from '../components/Hooks/useAuth';
+
+import Home from 'pages/Home';
+import Register from 'pages/Register';
+import Login from 'pages/Login';
+import { Contacts } from 'pages/Contacts';
+
 
 export const App = () => {
-  const contacts = useSelector(getContacts),
-    isLoading = useSelector(selectIsLoading),
-    error = useSelector(selectError),
-    dispatch = useDispatch();
-  useEffect(() => {dispatch(fetchContacts())}, [dispatch])
-  
-  return <div className={style.container}>
-    <h1>Phonebook</h1>
-      <ContactsForm />
-      <FilterInput/>
-      <h2>Contacts</h2>
-      {isLoading && !error && <b>Request in progress...</b>}
-      {contacts.length > 0 && <PhonebookList/>}
-  </div>
+const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home/>} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        />
+      </Route>
+    </Routes>
+  );
 };

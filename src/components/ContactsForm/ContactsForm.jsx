@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { getContacts } from 'redux/phonebook/selectors';
+import { addContact } from 'redux/phonebook/operations';
 
+import { Input, Button } from '@chakra-ui/react';
 import style from './contactsForm.module.css';
 
 export const ContactsForm = () => {
@@ -56,8 +57,8 @@ export const ContactsForm = () => {
     return(
     <form onSubmit={onSubmitForm} className = {style.searchForm}>
         <label htmlFor="Name">
-        Name
-        <input
+            <Input
+            placeholder='Name'
             onInput={onInputChange}
             value={fieldValues.name}
             type="text"
@@ -68,8 +69,8 @@ export const ContactsForm = () => {
         />
         </label>
         <label htmlFor="Number">
-        Number
-        <input
+            <Input
+            placeholder='Number'
             onInput={onInputChange}
             value={fieldValues.number}
             type="tel"
@@ -79,6 +80,6 @@ export const ContactsForm = () => {
             required
         />
         </label>
-        <button type="submit">Add contact</button>
+        <Button type="submit">Add contact</Button>
     </form>)
 }
