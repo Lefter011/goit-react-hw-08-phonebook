@@ -1,5 +1,7 @@
 # Phonebook Website
 
+![image](https://user-images.githubusercontent.com/94438982/222685318-14f9e575-b6ad-4134-a05e-a38826318536.png)
+
 Our phonebook website allows users to register and save their contacts. The website is built using React with the useState API, Axios, and Chakra UI, providing a modern and responsive user interface.
 
 ## Features
